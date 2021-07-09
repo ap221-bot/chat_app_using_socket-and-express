@@ -1,0 +1,57 @@
+<html>
+<head>
+    <title>Chat Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script src="/socket.io/socket.io.js"></script>
+    
+</head>
+<body>
+    <div>
+        <table>
+            
+        <tbody id="myTable">
+            {{#each results1}}
+            <tr>
+                <td>User {{ from_user }}:</td>
+                <td>{{ msg }}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    </div>
+    <div>
+        <form id="enter">
+        <label>Message</label><br>
+        <textarea name="msg" id="msg" rows="4" cols="50" required></textarea><br>
+        <button id="entr" type="submit">send</button><br>
+        </form>
+    </div>
+    <script>
+        var socket = io();
+        var form = document.getElementById('enter');
+        var input = document.getElementById('msg');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (input.value) {
+            socket.emit('chat message', input.value, {{ from1 }});
+            input.value = '';
+            
+        }
+        });
+        socket.on("show",(res)=>{
+                var ii=0;
+                console.log("show");
+                
+                //for(ii=0;ii<res.length;ii++)
+                //{
+                    //console.log(ii);
+                    //console.log(res[ii].msg);
+                    $("#myTable").append($('<tr> <td>'+'User '+ {{ to1 }} +': ' +'</td> <td>' + res + '</td> </tr>'));
+                //}
+        });
+
+        
+    </script>
+</body>
+</html>

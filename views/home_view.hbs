@@ -1,0 +1,20 @@
+<html>
+   <head>
+      <script type = "text/javascript">
+         <!--
+            function Redirect() {
+               window.location = "product_view.hbs";
+            }
+         //-->
+      </script>
+   </head>
+   
+   <body>
+      <form action="/h_save" method="post">
+        <label>Type your user ID</label><br>
+        <input type="number" name="from_user" min="1" max="2" id="from_user" required><br>
+         <input type = "submit" value = "Enter to chat" onclick = "Redirect();">
+      </form>
+      
+   </body>
+</html>
